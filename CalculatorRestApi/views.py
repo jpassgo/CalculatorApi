@@ -14,9 +14,11 @@ def sum(request):
     )
 
 @csrf_exempt
-def difference():
+def difference(request):
+    request_body = json.loads(request.body)
+    difference_of_two_operands = difference_of_operands(request_body['first_operand'], request_body['second_operand'])
     return HttpResponse(
-        'sum',
+        json.dumps({'difference': difference_of_two_operands}),
         content_type="application/json"
     )
 
@@ -36,3 +38,6 @@ def divide():
 
 def sum_operands(first_operand, second_operand):
     return float(first_operand) + float(second_operand)
+
+def difference_of_operands(first_operand, second_operand):
+    return float(first_operand) - float(second_operand)
