@@ -7,11 +7,11 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def sum(request):
     request_body = json.loads(request.body)
-    sum_of_two_operands = sum_operands(
+    sum = sum_operands(
         request_body['first_operand'],
         request_body['second_operand'])
     return HttpResponse(
-        json.dumps({'sum': sum_of_two_operands}),
+        json.dumps({'sum': sum}),
         content_type="application/json"
     )
 
@@ -19,10 +19,10 @@ def sum(request):
 @csrf_exempt
 def difference(request):
     request_body = json.loads(request.body)
-    difference_of_two_operands = difference_of_operands(
+    difference = difference_of_operands(
         request_body['first_operand'], request_body['second_operand'])
     return HttpResponse(
-        json.dumps({'difference': difference_of_two_operands}),
+        json.dumps({'difference': difference}),
         content_type="application/json"
     )
 
@@ -30,19 +30,23 @@ def difference(request):
 @csrf_exempt
 def multiply(request):
     request_body = json.loads(request.body)
-    product_of_two_operands = product_of_operands(
+    product = product_of_operands(
         request_body['first_operand'],
         request_body['second_operand'])
     return HttpResponse(
-        json.dumps({'product': product_of_two_operands}),
+        json.dumps({'product': product}),
         content_type="application/json"
     )
 
 
 @csrf_exempt
-def divide():
+def divide(request):
+    request_body = json.loads(request.body)
+    quotient = quotient_of_operands(
+        request_body['first_operand'],
+        request_body['second_operand'])
     return HttpResponse(
-        'sum',
+        json.dumps({'qoutient': quotient}),
         content_type="application/json"
     )
 
@@ -57,3 +61,6 @@ def difference_of_operands(first_operand, second_operand):
 
 def product_of_operands(first_operand, second_operand):
     return float(first_operand) * float(second_operand)
+
+def quotient_of_operands(first_operand, second_operand):
+    return float(first_operand) / float(second_operand)
