@@ -62,5 +62,6 @@ def difference_of_operands(first_operand, second_operand):
 def product_of_operands(first_operand, second_operand):
     return float(first_operand) * float(second_operand)
 
+
 def quotient_of_operands(first_operand, second_operand):
     return float(first_operand) / float(second_operand)
