@@ -42,11 +42,8 @@ def multiply(request):
 @csrf_exempt
 def divide(request):
     request_body = json.loads(request.body)
-    quotient = quotient_of_operands(
-        request_body['first_operand'],
-        request_body['second_operand'])
     return HttpResponse(
-        json.dumps({'qoutient': quotient}),
+        json.dumps({'qoutient': lambda x, y : float(request_body['first_operand']) / float(request_body['second_operand'])}),
         content_type="application/json"
     )
 
